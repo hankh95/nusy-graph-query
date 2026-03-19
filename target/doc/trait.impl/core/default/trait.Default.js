@@ -1,0 +1,9 @@
+(function() {
+    const implementors = Object.fromEntries([["nusy_graph_query",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.94.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"nusy_graph_query/cache/struct.EmbeddingCache.html\" title=\"struct nusy_graph_query::cache::EmbeddingCache\">EmbeddingCache</a>",0],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.94.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"nusy_graph_query/hybrid_rank/struct.HybridConfig.html\" title=\"struct nusy_graph_query::hybrid_rank::HybridConfig\">HybridConfig</a>",0],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.94.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"nusy_graph_query/ollama/struct.OllamaEmbeddingProvider.html\" title=\"struct nusy_graph_query::ollama::OllamaEmbeddingProvider\">OllamaEmbeddingProvider</a>",0],["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.94.0/core/default/trait.Default.html\" title=\"trait core::default::Default\">Default</a> for <a class=\"struct\" href=\"nusy_graph_query/subprocess/struct.SubprocessEmbeddingProvider.html\" title=\"struct nusy_graph_query::subprocess::SubprocessEmbeddingProvider\">SubprocessEmbeddingProvider</a>",0]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":59,"fragment_lengths":[1362]}
