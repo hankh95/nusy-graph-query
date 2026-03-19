@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"mod":["cache","embedding","hybrid_rank","ollama","subprocess","traversal"]};

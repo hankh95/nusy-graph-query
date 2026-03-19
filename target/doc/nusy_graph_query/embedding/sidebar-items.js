@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["EmbeddingError"],"fn":["cosine_similarity","hash_to_vector","semantic_search"],"struct":["EmbeddedItem","HashEmbeddingProvider","SearchResult"],"trait":["EmbeddingProvider"],"type":["Result"]};

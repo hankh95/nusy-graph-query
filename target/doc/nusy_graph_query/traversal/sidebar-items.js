@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"enum":["Direction"],"fn":["bfs","bfs_with_adjacency","build_adjacency","build_adjacency_from_list"],"struct":["EdgeSchema","TraversalNode"]};
