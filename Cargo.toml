@@ -1,0 +1,29 @@
+[package]
+name = "nusy-graph-query"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Graph-native semantic search for Arrow RecordBatches — embeddings, traversal, hybrid ranking, and caching"
+repository = "https://github.com/hankh95/nusy-graph-query"
+documentation = "https://docs.rs/nusy-graph-query"
+readme = "README.md"
+keywords = ["arrow", "graph", "semantic-search", "embeddings", "knowledge-graph"]
+categories = ["data-structures", "science"]
+
+[dependencies]
+arrow = { version = "55", features = ["prettyprint"] }
+parquet = { version = "55", features = ["arrow"] }
+sha2 = "0.10"
+chrono = "0.4"
+thiserror = "2"
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "1", optional = true }
+ureq = { version = "2", features = ["json"], optional = true }
+
+[features]
+default = []
+ollama = ["dep:serde", "dep:serde_json", "dep:ureq"]
+subprocess = ["dep:serde_json"]
+
+[dev-dependencies]
+tempfile = "3"
