@@ -12,7 +12,7 @@ categories = ["data-structures", "science"]
 
 [dependencies]
 arrow = { version = "55", features = ["prettyprint"] }
-parquet = { version = "55", features = ["arrow"] }
+parquet = { version = "58", features = ["arrow"] }
 sha2 = "0.10"
 chrono = "0.4"
 thiserror = "2"
