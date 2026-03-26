@@ -145,7 +145,7 @@ pub fn bfs(
 /// Build an adjacency list from a simple string list column.
 ///
 /// This variant handles the kanban `depends_on` pattern where dependencies
-/// are stored as a `List<Utf8>` column on each item, rather than in a
+/// are stored as a List<Utf8> column on each item, rather than in a
 /// separate edges table.
 pub fn build_adjacency_from_list(
     batch: &RecordBatch,

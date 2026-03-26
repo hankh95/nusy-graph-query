@@ -55,10 +55,7 @@ impl HashEmbeddingProvider {
 
 impl EmbeddingProvider for HashEmbeddingProvider {
     fn embed_batch(&self, texts: &[String]) -> Result<Vec<Vec<f32>>> {
-        Ok(texts
-            .iter()
-            .map(|t| hash_to_vector(t, self.dim))
-            .collect())
+        Ok(texts.iter().map(|t| hash_to_vector(t, self.dim)).collect())
     }
 
     fn dim(&self) -> usize {

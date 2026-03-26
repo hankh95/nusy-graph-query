@@ -62,15 +62,20 @@ pub fn hybrid_rank(
     // Build lookup: id → semantic score
     let semantic_scores: std::collections::HashMap<&str, f32> = embeddings
         .iter()
-        .map(|item| (item.id.as_str(), cosine_similarity(&query_vec, &item.vector)))
+        .map(|item| {
+            (
+                item.id.as_str(),
+                cosine_similarity(&query_vec, &item.vector),
+            )
+        })
         .collect();
 
     let mut results: Vec<RankedResult> = candidates
         .iter()
         .map(|c| {
             let semantic_score = semantic_scores.get(c.id.as_str()).copied().unwrap_or(0.0);
-            let combined =
-                config.structural_weight * c.structural_score + config.semantic_weight * semantic_score;
+            let combined = config.structural_weight * c.structural_score
+                + config.semantic_weight * semantic_score;
             RankedResult {
                 id: c.id.clone(),
                 score: combined,

@@ -1,23 +1,47 @@
-//! nusy-graph-query — Graph-native semantic search for Arrow RecordBatches.
+//! # nusy-graph-query
 //!
-//! Provides embedding, graph traversal, hybrid ranking, and embedding caching
-//! for Arrow-backed knowledge graphs. Useful for any system that needs to
-//! search and traverse structured knowledge stored in Arrow RecordBatches.
+//! Graph-native semantic search for Arrow RecordBatches — embeddings,
+//! traversal, hybrid ranking, and caching.
 //!
-//! # Modules
+//! This crate provides the building blocks for combining structural graph
+//! queries with semantic similarity search over Apache Arrow data.
+//!
+//! ## Quick Example
+//!
+//! ```rust
+//! use nusy_graph_query::{HashEmbeddingProvider, EmbeddingProvider, cosine_similarity};
+//!
+//! let provider = HashEmbeddingProvider::new(384);
+//! let vecs = provider.embed_batch(&[
+//!     "Alice knows Bob".to_string(),
+//!     "Cat is an animal".to_string(),
+//! ]).unwrap();
+//!
+//! let sim = cosine_similarity(&vecs[0], &vecs[1]);
+//! assert!(sim >= -1.0 && sim <= 1.0);
+//! ```
+//!
+//! ## Modules
 //!
 //! - [`embedding`] — `EmbeddingProvider` trait, hash provider, cosine similarity
 //! - [`traversal`] — Generic BFS/DFS over Arrow edge RecordBatches
-//! - [`hybrid_rank()`] — Combine structural + semantic scores
+//! - [`hybrid_rank`] — Combine structural + semantic scores
 //! - [`cache`] — Content-hash embedding cache with Parquet persistence
-//! - [`ollama`] — Ollama embedding provider (feature: `ollama`)
 //! - [`subprocess`] — Python sentence-transformers provider (feature: `subprocess`)
+//! - [`fastembed_provider`] — Local ONNX embedding provider (feature: `fastembed`)
+//!
+//! ## Feature Flags
+//!
+//! | Flag | Description |
+//! |------|-------------|
+//! | `subprocess` | Enable Python sentence-transformers provider |
+//! | `fastembed` | Enable local ONNX embedding via fastembed-rs (~2ms/chunk) |
 
 pub mod cache;
 pub mod embedding;
+#[cfg(feature = "fastembed")]
+pub mod fastembed_provider;
 pub mod hybrid_rank;
-#[cfg(feature = "ollama")]
-pub mod ollama;
 #[cfg(feature = "subprocess")]
 pub mod subprocess;
 pub mod traversal;
@@ -29,8 +53,8 @@ pub use embedding::{
     cosine_similarity, hash_to_vector, semantic_search,
 };
 pub use hybrid_rank::{HybridConfig, RankCandidate, RankedResult, hybrid_rank};
-#[cfg(feature = "ollama")]
-pub use ollama::OllamaEmbeddingProvider;
+#[cfg(feature = "fastembed")]
+pub use fastembed_provider::FastembedProvider;
 #[cfg(feature = "subprocess")]
 pub use subprocess::SubprocessEmbeddingProvider;
 pub use traversal::{

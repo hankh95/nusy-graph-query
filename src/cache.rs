@@ -248,11 +248,7 @@ impl EmbeddingCache {
                     .ok_or("vector values not Float32Array")?;
                 let vec: Vec<f32> = (0..float_arr.len()).map(|j| float_arr.value(j)).collect();
 
-                cache.insert(
-                    ids.value(i).to_string(),
-                    hashes.value(i).to_string(),
-                    vec,
-                );
+                cache.insert(ids.value(i).to_string(), hashes.value(i).to_string(), vec);
             }
         }
 
@@ -386,11 +382,7 @@ mod tests {
         let mut cache = EmbeddingCache::new();
 
         // Pre-cache "B" but not "A"
-        cache.insert(
-            "B".to_string(),
-            "h2".to_string(),
-            p.embed("world").unwrap(),
-        );
+        cache.insert("B".to_string(), "h2".to_string(), p.embed("world").unwrap());
 
         let items = vec![
             ("A".to_string(), "h1".to_string(), "hello".to_string()),
